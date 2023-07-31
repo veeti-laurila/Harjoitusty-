@@ -7,22 +7,22 @@
     tools:context=".fragments.FragmentFight">
 
     <RadioGroup
-        android:id="@+id/radioGroupFight"
+        android:id="@+id/radioGroupBattleField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RadioGroupMoveFight">
+        app:layout_constraintTop_toBottomOf="@+id/RadioGroupMoveBattleField">
 
         <RadioButton
-            android:id="@+id/radioButtonHomeFight"
+            android:id="@+id/radioButtonHomeBattleField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Kotiin" />
 
         <RadioButton
-            android:id="@+id/radioButtonTrainingAreaFight"
+            android:id="@+id/radioButtonTrainingAreaBattleField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Treenaamaan" />
@@ -30,18 +30,18 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/buttonMoveFight"
+        android:id="@+id/buttonMoveBattleField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Siirrä valitut Lutemonit"
+        android:text="Siirrä valittu Lutemon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupFight" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupBattleField" />
 
     <RadioGroup
-        android:id="@+id/RadioGroupMoveFight"
+        android:id="@+id/RadioGroupMoveBattleField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"

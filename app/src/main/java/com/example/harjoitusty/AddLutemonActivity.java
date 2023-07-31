@@ -19,17 +19,20 @@ public class AddLutemonActivity extends AppCompatActivity {
         name = findViewById(R.id.editTextName);
     }
 
+    // returns name
     public String getName() {
         String lutemonName = name.getText().toString();
         return lutemonName;
     }
 
+    // returns random ID
     public int getID() {
         double ID = Math.random() * 100;
         int id = (int)ID;
         return id;
     }
 
+    // Creates new Lutemon
     public void addLutemon(View view) {
         RadioGroup rgColor = findViewById(R.id.RadioGroupColor);
 
@@ -57,5 +60,6 @@ public class AddLutemonActivity extends AppCompatActivity {
         }
 
         name.getText().clear();
+        rgColor.clearCheck();
     }
 }

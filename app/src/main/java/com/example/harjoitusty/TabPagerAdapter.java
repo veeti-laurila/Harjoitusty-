@@ -7,7 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.harjoitusty.fragments.FragmentHome;
 import com.example.harjoitusty.fragments.FragmentTraining;
-import com.example.harjoitusty.fragments.FragmentFight;
+import com.example.harjoitusty.fragments.FragmentBattleField;
 
 public class TabPagerAdapter extends FragmentStateAdapter {
 
@@ -24,7 +24,7 @@ public class TabPagerAdapter extends FragmentStateAdapter {
             case 1:
                 return new FragmentTraining();
             case 2:
-                return new FragmentFight();
+                return new FragmentBattleField();
             default:
                 return new FragmentHome();
         }

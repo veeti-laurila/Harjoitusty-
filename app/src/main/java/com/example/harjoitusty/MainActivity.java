@@ -18,23 +18,27 @@ public class MainActivity extends AppCompatActivity {
         context = this;
     }
 
+    // Starts AddLutemonActivity
     public void switchToAddLutemon(View view) {
         Intent intent = new Intent(getApplicationContext(), AddLutemonActivity.class);
         startActivity(intent);
     }
 
+    // Starts ListLutemonsActivity
     public void switchToListLutemons(View view) {
         Intent intent = new Intent(getApplicationContext(), ListLutemonsActivity.class);
         startActivity(intent);
     }
 
+    // Starts MoveLutemonsActivity
     public void switchToMoveLutemons(View view) {
         Intent intent = new Intent(getApplicationContext(), MoveLutemonsActivity.class);
         startActivity(intent);
     }
 
+    // Starts FightLutemonActivity
     public void switchToFightLutemons(View view) {
         Intent intent = new Intent(getApplicationContext(), FightLutemonsActivity.class);
-        startActivity(intent)   ;
+        startActivity(intent);
     }
 }

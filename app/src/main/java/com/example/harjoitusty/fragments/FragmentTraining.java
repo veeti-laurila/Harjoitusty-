@@ -1,13 +1,19 @@
 package com.example.harjoitusty.fragments;
 
+import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -22,10 +28,9 @@ import java.util.ArrayList;
 
 public class FragmentTraining extends Fragment {
 
-    private Home home;
-    private Storage storage;
-    private TrainingArea trainingArea;
     private BattleField battleField;
+    private TrainingArea trainingArea;
+    private Home home;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,55 +41,66 @@ public class FragmentTraining extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_training, container, false);
 
-        home = Home.getInstance();
-        trainingArea = TrainingArea.getInstance();
         battleField = BattleField.getInstance();
-        storage = Storage.getInstance();
-
-        ArrayList<Lutemon> lutemonsMove = new ArrayList<>();
+        trainingArea = TrainingArea.getInstance();
+        home = Home.getInstance();
 
         ArrayList<Lutemon> lutemonsTraining = trainingArea.getLutemonsTrainingArea();
-        RadioGroup rgMoveHome = view.findViewById(R.id.RadioGroupMoveTraining);
+        RadioGroup rgMoveTraining = view.findViewById(R.id.RadioGroupMoveTraining);
 
+        // Creates RadioButton for every Lutemon in TrainingArea
         for (Lutemon lutemon : lutemonsTraining) {
             RadioButton rb = new RadioButton(view.getContext());
             rb.setText(lutemon.getName() + " (" + lutemon.getColor() + ")");
             rb.setId(lutemon.getID());
-            rgMoveHome.addView(rb);
+            rgMoveTraining.addView(rb);
         }
 
+        rgMoveTraining.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int id) {
+
+            }
+        });
+
         Button buttonMoveTraining = view.findViewById(R.id.buttonMoveTraining);
+        RadioGroup rgTraining = view.findViewById(R.id.radioGroupTraining);
 
         buttonMoveTraining.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for (Lutemon lutemon : lutemonsTraining) {
-                    RadioButton rb = view.findViewById(lutemon.getID());
-                    if (rb.isChecked()) {
-                        lutemonsMove.add(lutemon);
-                    }
-                }
+                if (rgTraining != null) {
+                    Lutemon lutemonRemove = null;
+                    int selectedRadioButtonId = rgMoveTraining.getCheckedRadioButtonId();
 
-                RadioGroup rgTraining = view.findViewById(R.id.radioGroupTraining);
-                switch (rgTraining.getCheckedRadioButtonId()) {
-                    case (R.id.radioButtonTrainingAreaHome):
-                        for (Lutemon lutemon : lutemonsMove) {
-                            home.createLutemon(lutemon);
-                            trainingArea.removeLutemonFromTraining(lutemon.getID());
+                    // Adds selected Lutemon to list
+                    for (Lutemon lutemon : lutemonsTraining) {
+                        if (lutemon.getID() == selectedRadioButtonId) {
+                            lutemonRemove = lutemon;
+                            break;
                         }
-                        break;
-                    case (R.id.radioButtonTrainingAreaFight):
-                        for (Lutemon lutemon : lutemonsMove) {
-                            battleField.addLutemonToBattleField(lutemon);
-                            trainingArea.removeLutemonFromTraining(lutemon.getID());
+                    }
+
+                    // Moves Lutemon to selected place and removes it from TrainingArea
+                    if (lutemonRemove != null) {
+                        switch (rgTraining.getCheckedRadioButtonId()) {
+                            case (R.id.radioButtonHomeTraining):
+                                home.createLutemon(lutemonRemove);
+                                home.addLutemonToLutemonsMovedToHome(lutemonRemove);
+                                break;
+                            case (R.id.radioButtonBattleFieldTraining):
+                                battleField.addLutemonToBattleField(lutemonRemove);
+                                break;
                         }
-                        break;
-                };
+                        trainingArea.removeLutemonFromTraining(lutemonRemove.getID());
+                    }
+                    rgTraining.clearCheck();
+                    rgMoveTraining.clearCheck();
+                }
             }
         });
         return view;

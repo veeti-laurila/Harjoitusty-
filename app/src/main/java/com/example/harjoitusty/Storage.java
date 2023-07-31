@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    private ArrayList<Lutemon> lutemons = new ArrayList<>();
+    protected ArrayList<Lutemon> lutemons = new ArrayList<>();
 
     private static Storage storage = null;
 
     public Storage() {
-
+        lutemons.clear();
     }
 
     public static Storage getInstance() {
@@ -19,19 +19,27 @@ public class Storage {
         return storage;
     }
 
+    // Returns lutemons
     public ArrayList<Lutemon> getLutemons() {
         return lutemons;
     }
 
-    public Lutemon getLutemon(int id) {
-        return lutemons.get(id);
+    // Removes Lutemon from Storage
+    public void removeLutemonFromStorage(int id) {
+        Lutemon lutemonRemove = null;
+        for (Lutemon lutemon : lutemons) {
+            if (lutemon.getID() == id) {
+                lutemonRemove = lutemon;
+                break;
+            }
+        }
+        if (lutemonRemove != null) {
+            lutemons.remove(lutemonRemove);
+        }
     }
 
+    // Adds Lutemon to list
     public void addLutemon(Lutemon lutemon) {
         lutemons.add(lutemon);
-    }
-
-    public void listLutemons() {
-
     }
 }

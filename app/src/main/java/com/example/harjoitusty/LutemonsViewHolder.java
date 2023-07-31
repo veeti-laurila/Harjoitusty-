@@ -20,5 +20,6 @@ public class LutemonsViewHolder extends RecyclerView.ViewHolder {
         defense = itemView.findViewById(R.id.textViewDefense);
         health = itemView.findViewById(R.id.textViewHealth);
         experience = itemView.findViewById(R.id.textViewExperience);
+        picture = itemView.findViewById(R.id.imageViewPicture);
     }
 }

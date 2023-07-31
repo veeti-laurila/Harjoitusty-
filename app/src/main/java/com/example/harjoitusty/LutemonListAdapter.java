@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class LutemonListAdapter extends RecyclerView.Adapter<LutemonsViewHolder> {
@@ -32,6 +33,7 @@ public class LutemonListAdapter extends RecyclerView.Adapter<LutemonsViewHolder>
         holder.defense.setText("Puolustus: " + lutemons.get(position).getDefense());
         holder.health.setText("Elämä: " + lutemons.get(position).getHealth() + "/" + lutemons.get(position).getMaxHealth());
         holder.experience.setText("Kokemus: " + lutemons.get(position).getExperience());
+        holder.picture.setImageResource(lutemons.get(position).getPicture());
     }
 
     @Override
